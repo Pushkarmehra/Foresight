@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="Predictive Maintenance System banner" width="100%">
+  <img src="banner.png" alt="Predictive Maintenance System banner" width="100%">
 </p>
 
 <h1 align="center">Predictive Maintenance System</h1>
@@ -25,7 +25,7 @@ An end-to-end, production-shaped predictive maintenance system for industrial ma
 This is deliberately built to go past the "load CSV → RandomForest → 94% accuracy" version of this project. See [`docs/why-this-is-hard.md`](docs/why-this-is-hard.md) for the reasoning behind every architectural decision below.
 
 <p align="center">
-  <img src="assets/architecture.png" alt="System architecture diagram" width="100%">
+  <img src="architecture.png" alt="System architecture diagram" width="100%">
 </p>
 
 ---
@@ -222,5 +222,6 @@ docker-compose up
 ## License
 
 MIT — see [LICENSE](LICENSE).
-#   F o r e s i g h t  
+#   F o r e s i g h t 
+ 
  
