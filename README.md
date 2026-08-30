@@ -21,13 +21,44 @@
 ## Quick Navigation
 
 - [The Problem](#the-problem) — Why this matters
+- [Quick Start Decision Tree](#-quick-start-decision-tree) — Choose your path
 - [What This Is](#what-this-is) — System architecture & approach
 - [Tech Stack](#tech-stack-professional-resume-defensible) — Professional tools & why
-- [Project Roadmap](#project-roadmap) — 12 phases, from setup to deployment
 - [Key Differentiators](#key-differentiators) — What makes this production-grade
-- [Data Leakage Checklist](#data-leakage-checklist-keep-this-its-a-genuine-differentiator) — Senior-level practice
+- [Project Roadmap](#project-roadmap) — 12 phases with time estimates
 - [Getting Started](#getting-started) — Run it locally in 2 minutes
+- [Common Pitfalls](#-common-pitfalls) — What to avoid
 - [Project Structure](#project-structure) — Folder organization
+
+---
+
+## ⚡ Quick Start Decision Tree
+
+**What's your goal?**
+
+```
+Are you a...
+
+📚 STUDENT learning ML end-to-end?
+   → Do Phases 0-6 (core: 60-80 hrs)
+   → Then pick ONE phase 7-12 to deepen
+   → Recommendation: Phase 5 (Anomaly Detection) or Phase 7 (Survival Analysis)
+
+💼 CANDIDATE building a portfolio?
+   → Do Phases 0-8 (core + explainability: 90-120 hrs)
+   → Push Phase 10 (React frontend) for "I can ship"
+   → Recommendation: Complete phases 0-8, then pick Phase 10 OR Phase 11
+
+🏭 ENGINEER solving a real problem?
+   → Phases 0-11 (production-ready: 120-160 hrs)
+   → Phase 12 (documentation) last
+   → Recommendation: All core phases, at least one push-your-limits per phase
+
+⚡ FAST TRACK (weekend project)?
+   → Phases 0, 1 (data), 2 (labels), 6 (XGBoost), 10 (API only)
+   → Skip: survival analysis, autoencoder, React, drift monitoring
+   → Time: 20-30 hrs, skip push-your-limits
+```
 
 ---
 
@@ -126,11 +157,15 @@ You can actually *ship* this, not just present results.
 **Current Status:** Phase 0 — Setting up the foundation. Check off phases as you complete them.
 
 ### Phase 0 — Setup (Foundation)
+**⏱️ Time: 2–4 hours** | **Difficulty: Beginner**
+
 - [ ] Initialize repo with `src/`, `data/`, `notebooks/`, `tests/`, `app/`, `docs/`, `assets/`
 - [ ] Set up a virtual environment + `requirements.txt` / `pyproject.toml`
 - [ ] Set up `pre-commit` with `black`, `ruff`, `isort`
 - [ ] Set up GitHub Actions CI (lint + test on push)
 - **🌟 Push past your limits:** Use `uv` or `poetry` instead of raw `pip` — learn modern Python packaging.
+
+**📚 Resources:** [Virtual Environments](https://docs.python.org/3/tutorial/venv.html) | [Pre-commit](https://pre-commit.com/) | [GitHub Actions](https://docs.github.com/en/actions/quickstart)
 
 ### Phase 1 — Data (Ingestion & Exploration)
 - [ ] Choose data source: NASA CMAPSS, AI4I 2020 UCI dataset, or self-written simulator
@@ -215,7 +250,15 @@ You can actually *ship* this, not just present results.
 
 ---
 
+---
+
 ## Full task list — every phase, in order
+
+**Total project time estimate:**
+- **Core (Phases 0–6):** 60–80 hours
+- **Core + Advanced (Phases 0–8):** 90–110 hours  
+- **Full project (Phases 0–12):** 120–160 hours
+- **With all push-your-limits items:** 150–200 hours
 
 Check items off as you go. Each phase has a **core task list** (required) and a **push-your-limits** list (optional, but what turns this from "a project" into "a portfolio centerpiece"). Do at least one push-your-limits item per phase.
 
@@ -305,6 +348,25 @@ Check items off as you go. Each phase has a **core task list** (required) and a 
 - [ ] Add a demo GIF of the running app to the README
 - [ ] Write a short model card / limitations section
 - **Push past your limits:** Record a 2–3 minute Loom/YouTube walkthrough and link it at the top of the README — recruiters and interviewers are far more likely to watch 2 minutes than clone and run your repo.
+
+---
+
+---
+
+## ⚠️ Common Pitfalls (What NOT to Do)
+
+| Pitfall | Impact | Fix |
+|---|---|---|
+| **Random train/test split** | Severe leakage; model sees future data | Always split by **time** and **machine group** |
+| **Fitting scaler on full dataset** | Moderate leakage; test metrics too optimistic | Fit on train only, transform test with it |
+| **Centered rolling windows** | Subtle leakage; features see future | Use only **backward-looking** (trailing) windows |
+| **Skipping class imbalance handling** | High false negatives; misses failures | Use `scale_pos_weight`, not blind oversampling |
+| **Defaulting to accuracy as metric** | Wrong decision threshold; poor precision | Use PR-AUC, recall@precision for imbalanced data |
+| **No baseline comparison** | Can't justify ML complexity | Always compare against naive baseline |
+| **Treating all features equally** | Poor explainability; hard to debug | Use SHAP to understand what drives predictions |
+| **Predictions without confidence** | Operations can't trust model | Always return confidence intervals or uncertainty |
+| **No validation on held-out machines** | Good metrics on familiar machines, fails in production | Evaluate on machines the model has never seen |
+| **Skipping documentation** | Impossible to reproduce; knowledge lost | Document every design decision, trade-off, limitation |
 
 ---
 
@@ -491,32 +553,112 @@ predictive-maintenance-system/
 
 ---
 
-## Frequently Asked Questions
+## Code Snippet Examples
 
-**Q: Is this too complicated?**  
-A: No, it's deliberately complex in *the right ways*—the parts that matter for real systems. You'll skip the toy stuff and learn what actually separates junior from senior ML engineers.
+### Example 1: Time-Series-Safe Train/Test Split
+```python
+from sklearn.model_selection import GroupKFold
 
-**Q: Can I use real data instead of simulated data?**  
-A: Absolutely. NASA CMAPSS and AI4I 2020 are standard benchmarks. Phase 1 supports both.
+def train_test_split_no_leakage(df, test_size=0.2):
+    """Split by time AND machine — ensures no leakage."""
+    df = df.sort_values(['machine_id', 'hour']).reset_index(drop=True)
+    
+    splitter = GroupKFold(n_splits=int(1/test_size))
+    train_idx, test_idx = next(splitter.split(df, groups=df['machine_id']))
+    
+    # Verify no time leakage
+    assert df.loc[test_idx, 'hour'].min() >= df.loc[train_idx, 'hour'].max(), \
+        "Time leakage detected!"
+    
+    return df.iloc[train_idx], df.iloc[test_idx]
+```
 
-**Q: Do I need to do all 12 phases?**  
-A: Not all. Core phases (0–6) are required for a working system. Phases 7–12 are "stretch" and phase-level push-your-limits items show mastery.
+### Example 2: Failure-Horizon Labeling
+```python
+def create_failure_labels(df, horizon_days=7, embargo_days=2):
+    """Label rows within horizon_days before failure."""
+    df = df.copy()
+    df['label'] = 0
+    
+    for machine_id in df['machine_id'].unique():
+        machine_data = df[df['machine_id'] == machine_id]
+        failure_hour = machine_data['hour'].max()
+        
+        # Label rows in the failure horizon
+        mask = (machine_data['hour'] >= failure_hour - horizon_days * 24) & \
+               (machine_data['hour'] <= failure_hour - embargo_days * 24)
+        df.loc[mask, 'label'] = 1
+    
+    return df
+```
 
-**Q: How long will this take?**  
-A: 60–100 hours for core (Phases 0–6). Add 50–80 hours for advanced phases (7–12). Depends on your pace and how deep you go on push-your-limits items.
-
-**Q: What if I'm stuck on a phase?**  
-A: Each phase has a core task list (required) and push-your-limits (optional). Complete the core list and move on. You can loop back to push-your-limits later.
+### Example 3: Rolling Feature Engineering
+```python
+def create_rolling_features(df, columns=['vibration'], windows=[24, 168, 720]):
+    """Create rolling statistics without leakage."""
+    for col in columns:
+        for window in windows:
+            df[f'{col}_mean_{window}h'] = df.groupby('machine_id')[col].rolling(window).mean().reset_index(drop=True)
+            df[f'{col}_std_{window}h'] = df.groupby('machine_id')[col].rolling(window).std().reset_index(drop=True)
+            df[f'{col}_delta_{window}h'] = df.groupby('machine_id')[col].diff(window)
+    
+    # IMPORTANT: Drop NaN rows created by rolling windows
+    df = df.dropna()
+    return df
+```
 
 ---
 
-## Contributing & Feedback
+## Frequently Asked Questions
 
-Have ideas to improve this project? Found a bug in the starter template?
+**Q: Is this too complicated?**  
+A: No, it's deliberately complex in *the right ways*—the parts that matter for real systems. You'll skip the toy stuff and learn what actually separates junior from senior ML engineers. If you're new to ML, start with Phase 0–3 to build foundations, then pick ONE hard phase (Phase 5 or Phase 7) to go deep.
 
-- Open an issue to discuss improvements
-- Submit a PR with enhancements
-- Share your results and learnings
+**Q: Can I use real data instead of simulated data?**  
+A: Absolutely. NASA CMAPSS and AI4I 2020 are standard benchmarks. Phase 1 supports both. Real data will expose leakage issues more quickly—highly recommended if you have access.
+
+**Q: Do I need to do all 12 phases?**  
+A: Not all. **Minimum viable project:** Phases 0–6 (working ML pipeline, 60–80 hrs). **Impressive portfolio:** Phases 0–8 + Phase 10 (add explainability + API, 100–130 hrs). **Production-grade:** Phases 0–12 (full system, 140–180 hrs).
+
+**Q: How long will this take?**  
+A: See the time estimates in the roadmap per phase. **Core (0–6):** 60–80 hours. **Core + Advanced (0–8):** 90–110 hours. **Full project (0–12):** 120–160 hours. Add 50% if doing all push-your-limits items.
+
+**Q: What if I'm stuck on a phase?**  
+A: Each phase has a core task list (required) and push-your-limits (optional). Complete the core list and move on. You can loop back to push-your-limits later. Also check the "Common Pitfalls" section—90% of issues are in that table.
+
+**Q: Should I do push-your-limits for every phase?**  
+A: No. Do at least ONE per phase. Prioritize: Phase 3 (leakage tests), Phase 5 (autoencoder), Phase 7 (survival analysis), Phase 10 (React), Phase 11 (drift monitoring). Doing even 3-4 of these makes your project stand out.
+
+**Q: How do I know if my model is actually good?**  
+A: Use these checks: (1) Test on **held-out machines** the model has never seen, (2) Evaluate with **PR-AUC**, not accuracy, (3) Compare against a **naive baseline** (static thresholds), (4) Plot **lead time histogram**—average how many days early does it warn?, (5) Validate **calibration**—do predicted probabilities match actual frequencies?
+
+**Q: What tools should I use for experiment tracking?**  
+A: MLflow is built into the tech stack. Alternatives: Weights & Biases (W&B), Neptune, Comet. MLflow is free and self-hosted—start there, upgrade later if needed.
+
+**Q: Can I skip phases and come back later?**  
+A: No. Each phase builds on the previous one. You can't do Phase 6 (classification) without Phase 4 (features) and Phase 2 (labels). Do them in order, but you can skip optional items and return to them.
+
+---
+
+## Getting Help
+
+**Stuck on a phase?** Try these in order:
+1. Re-read the phase description and core tasks
+2. Check the "Common Pitfalls" table above
+3. Search the learning resources provided (links per phase)
+4. Open an issue with: phase #, what you tried, what went wrong
+5. Check issues from other contributors — your problem has likely been solved
+
+**Debugging leakage issues?** This is the #1 source of confusion.
+- Always verify: `test_min_timestamp >= train_max_timestamp` per machine
+- Use the `test_no_leakage.py` unit test examples in Phase 3
+- If in doubt, re-split the data — it's quick
+
+**Model not learning?** Check in this order:
+1. Do you have enough training data? (check `df.shape`)
+2. Is your label distribution reasonable? (check `df['label'].value_counts()`)
+3. Did you drop NaN after feature engineering? (check `df.isna().sum()`)
+4. Did you fit scalers/encoders only on train? (check your code)
 
 ---
 
