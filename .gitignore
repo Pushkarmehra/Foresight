@@ -1,2 +1,41 @@
+# Environments & Variables
 .env
-/venv
+.env.*
+venv/
+env/
+ENV/
+.venv/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing & Linting
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# MLflow & Experiment Tracking
+mlruns/
+.mlflow/
+
+# Data & Models (Keep gitkeeps)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/models/*
+!data/models/.gitkeep
+
+# IDEs & System Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
