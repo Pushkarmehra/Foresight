@@ -15,6 +15,7 @@
 
   <p align="center">
     <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/Storage-AWS%20S3-FF9900?style=flat-square&logo=amazons3&logoColor=white" alt="AWS S3">
     <img src="https://img.shields.io/badge/Classification-XGBoost%20%7C%20LightGBM-EB5424?style=flat-square&logo=xgboost&logoColor=white" alt="XGBoost">
     <img src="https://img.shields.io/badge/Deep%20Learning-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
     <img src="https://img.shields.io/badge/Survival%20Analysis-lifelines-FFA500?style=flat-square" alt="Lifelines">
@@ -136,9 +137,10 @@ The system is constructed as a decoupled, multi-layer intelligence hierarchy:
 
 | Layer | Component | Methodology | Primary Purpose |
 |---|---|---|---|
+| **Cloud Storage** | **AWS S3 Data Lake** | Amazon S3 + `boto3` Integration | Centralized repository for raw NASA C-MAPSS archives, Parquet feature stores, and serialized models. |
 | **Layer 1** | **Anomaly Detection** | Isolation Forest & PyTorch Deep Autoencoder | Detect subtle deviations from nominal healthy baselines; outputs unsupervised anomaly scores. |
-| **Layer 2** | **Failure Classification** | XGBoost & LightGBM with Imbalance Tuning | Classifies imminent failure risks within rolling 7-day lookahead windows. |
-| **Layer 3** | **Time-to-Event Survival** | Cox Proportional Hazards & Weibull AFT | Computes Remaining Useful Life (RUL) distributions with statistically rigorous confidence intervals. |
+| **Layer 2** | **Failure Classification** | XGBoost & LightGBM with Imbalance Tuning | Classifies imminent failure risks within rolling 7-day / 30-cycle lookahead windows. |
+| **Layer 3** | **Time-to-Event Survival** | Cox Proportional Hazards & Weibull AFT | Computes Remaining Useful Life (RUL) distributions with statistically rigorous 80% confidence intervals. |
 | **Layer 4** | **Explainability & API** | TreeSHAP & FastAPI Microservice | Translates complex model features into actionable sensor telemetry insights served over async REST endpoints. |
 
 ---
@@ -176,6 +178,7 @@ Each layer operates independently. Anomaly scores feed downstream classifiers as
 | Layer | Tools | Architectural Rationale |
 |---|---|---|
 | **Language** | Python 3.11+ | Modern typing, performance optimizations, and broad ML ecosystem support. |
+| **Cloud Storage** | AWS S3 (`boto3`, `s3fs`) | Centralized data lake for raw C-MAPSS archives, Parquet feature tables, and model registry. |
 | **Data Engine** | Pandas, Polars, NumPy | Polars enables high-throughput streaming and out-of-core sensor window aggregations. |
 | **Anomaly Detection** | scikit-learn `IsolationForest`, PyTorch | Dual-paradigm approach comparing classical tree ensembles against deep reconstruction error. |
 | **Classification** | XGBoost, LightGBM | Gradient boosted decision trees optimized for tabular sensor time-series features. |
@@ -396,9 +399,11 @@ Foresight/
 ├── 🐳 docker-compose.yml              # Multi-container orchestration (API + Dashboard)
 │
 ├── 📁 src/                             # Core production source code
-│   ├── data/                           # Ingestion & synthetic data generation
-│   │   ├── simulate.py                 # Telemetry simulator with physical failure modes
-│   │   └── loader.py                   # Data ingestion and stream parsers
+│   ├── data/                           # Ingestion, AWS S3 sync & benchmarks
+│   │   ├── download_cmapss.py          # NASA C-MAPSS dataset downloader & extractor
+│   │   ├── s3_utils.py                 # AWS S3 upload/download & sync client (boto3)
+│   │   ├── loader.py                   # NASA C-MAPSS parser & stream loader
+│   │   └── simulate.py                 # Telemetry simulator with physical failure modes
 │   │
 │   ├── features/                       # Signal processing & feature engineering
 │   │   ├── rolling_stats.py            # Trailing rolling statistics (mean, std, skew)

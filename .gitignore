@@ -24,13 +24,7 @@ htmlcov/
 mlruns/
 .mlflow/
 
-# Data & Models (Keep gitkeeps)
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-data/models/*
-!data/models/.gitkeep
+
 
 # IDEs & System Files
 .vscode/
