@@ -1,10 +1,10 @@
 <div align="center">
 
-  <img src="banner.png" alt="Foresight - Predictive Maintenance System Banner" width="100%" />
+  <img src="banner.png" alt="Foresight - Industrial AI & Cloud Predictive Maintenance System Banner" width="100%" />
 
-  # ⚙️ Foresight — Industrial Predictive Maintenance System
+  # ⚙️ Foresight — Industrial AI & Cloud Predictive Maintenance System
 
-  ### *Will this machine fail in the next 7 days? — and if so, when, why, and how confident are we?*
+  ### *Will this aircraft turbofan engine fail in the next 30 flight cycles? — and if so, when, why, and how confident are we?*
 
   <p align="center">
     <a href="https://github.com/Pushkarmehra/Foresight/stargazers"><img src="https://img.shields.io/github/stars/Pushkarmehra/Foresight?style=for-the-badge&color=ffd700&logo=star" alt="GitHub Stars"></a>
@@ -115,15 +115,16 @@ flowchart LR
 
 ## 💡 What This Is
 
-**Foresight** is an end-to-end, production-shaped predictive maintenance platform. As high-frequency telemetry streams across 7 critical sensors (*Temperature, Pressure, Vibration, RPM, Voltage, Current, Humidity*), the system continuously estimates:
+**Foresight** is an end-to-end, production-grade predictive maintenance platform integrated with **AWS S3** and validated on high-fidelity aerospace turbofan engine simulations (**NASA C-MAPSS**). As high-frequency telemetry streams across critical aircraft engine channels (*High-Pressure Compressor exit temperature $T_{30}$, static pressure $Ps_{30}$, core speed $N_c$, bypass ratio $BPR$, bleed enthalpy, vibration*), the system continuously estimates:
 
-- **Health Score (0–100):** Real-time composite equipment vitality index.
-- **Failure Horizon Probability:** Calibrated probability of failure within the next 7 days.
-- **Estimated Failure Window:** Statistical confidence bounds (*e.g., "3–6 days (80% CI)"* rather than a naive point estimate).
-- **Physical Root Cause Breakdown:** Transparent, SHAP-derived explanations translated into plain engineering language.
+- **System Vitality Gauge (0–100):** Real-time composite equipment vitality index reflecting degradation across thermal, mechanical, and aerodynamic subsystems.
+- **Failure Horizon Probability:** Calibrated probability of failure within the next 30 flight cycles (~1–2 operational weeks).
+- **Estimated Failure Window:** Statistical confidence bounds (*e.g., "34–48 cycles at 80% CI"* rather than an uncalibrated naive point estimate).
+- **Physical Root Cause Attribution:** Transparent, SHAP-derived explanations translated into plain aeronautical engineering diagnostics (*e.g., "High Risk (86%): Driven by HPC exit temperature (T30) rising +14°R and static pressure drop, indicating compressor blade erosion"*).
+- **Cloud-Native Data Lake:** Seamless integration with **Amazon S3** (`s3://foresight-predictive-maintenance/`) for raw archives, Parquet feature stores, and automated model registry tracking.
 
 > [!NOTE]
-> This repository is engineered specifically to surpass typical "toy" tutorials (*CSV → Random Forest → 95% Accuracy*). It enforces industrial constraints: zero data leakage, survival analysis, and production microservice packaging.
+> This repository is engineered specifically to surpass typical "toy" tutorials (*CSV → Random Forest → 95% Accuracy*). It enforces industrial aerospace constraints: zero data leakage, Weibull survival analysis, and production microservice packaging.
 
 ---
 
@@ -357,25 +358,39 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. Verify Installation
+### 2. Configure AWS S3 Credentials & Verify Installation
 
-```bash
-python -c "import pandas, xgboost, lifelines, fastapi; print('✓ All core dependencies successfully installed!')"
+Create or populate your local `.env` file at the root of the project:
+
+```ini
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=us-east-1
+S3_BUCKET_NAME=foresight-predictive-maintenance
 ```
 
-### 3. Run Pipeline *(Available in Phase 1)*
+Verify core libraries and cloud connectivity:
 
 ```bash
-# Generate synthetic sensor telemetry
-python src/data/simulate.py
+python -c "import boto3, pandas, xgboost, lifelines, fastapi, streamlit; print('✓ All core dependencies & AWS client ready!')"
+```
 
-# Execute end-to-end feature extraction and model training
-python src/pipeline.py
+### 3. Ingest Data & Sync to AWS S3
 
-# Launch FastAPI inference server
+```bash
+# 1. Download official NASA C-MAPSS turbofan benchmark dataset
+python src/data/download_cmapss.py
+
+# 2. Upload raw telemetry archives to Amazon S3 Data Lake
+python src/data/s3_utils.py
+
+# 3. Execute end-to-end feature extraction and model training
+python src/pipeline.py --dataset FD001 --use-s3 --train-all
+
+# 4. Launch FastAPI inference server
 uvicorn app.api.main:app --reload --port 8000
 
-# Launch interactive UI dashboard
+# 5. Launch interactive turbofan fleet operations dashboard
 streamlit run app/dashboard/app.py
 ```
 
