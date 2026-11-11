@@ -49,17 +49,17 @@ def upload_raw_data():
             f"Raw directory does not exist: {RAW_DIR}"
         )
 
-    files = [
+    files = sorted([
         file
-        for file in RAW_DIR.rglob("*")
-        if file.is_file()
-    ]
+        for file in RAW_DIR.rglob("*.txt")
+        if file.is_file() and file.suffix.lower() == ".txt"
+    ])
 
     if not files:
-        print("No files found in data/raw/")
+        print("No .txt files found in data/raw/")
         return
 
-    print(f"Found {len(files)} files.")
+    print(f"Found {len(files)} .txt files.")
     print()
 
     for file in files:

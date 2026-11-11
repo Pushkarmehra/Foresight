@@ -33,3 +33,10 @@ mlruns/
 *.swo
 .DS_Store
 Thumbs.db
+**/.ipynb_checkpoints/
+
+# Telemetry Data (Stored in S3 Data Lake - Exceeds GitHub 100MB limits)
+data/raw/
+data/processed/*.parquet
+data/processed/*_processed.csv
+data/processed/*-checkpoint.csv

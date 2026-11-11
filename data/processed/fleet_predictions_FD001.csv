@@ -1,0 +1,101 @@
+unit_nr,time_cycles,rul,rul_clipped,anomaly_score,failure_prob,rul_pred_lower_80ci,rul_pred_median,rul_pred_upper_80ci,survival_ci_display,health_score,health_tier,health_color
+1,31,112,112,0.077335216,0.00014728957,371,559,723,"Fails in 371–723 cycles (80% CI, median: 559)",95.6,Healthy (Normal),#34C759
+2,49,98,98,0.26660204,0.00036531652,203,322,425,"Fails in 203–425 cycles (80% CI, median: 322)",87.7,Healthy (Normal),#34C759
+3,126,69,69,1.0,0.06749565,82,179,264,"Fails in 82–264 cycles (80% CI, median: 179)",57.7,Warning (Maintenance Scheduled),#FF9500
+4,106,82,82,0.33168384,0.002122462,156,279,386,"Fails in 156–386 cycles (80% CI, median: 279)",83.1,Healthy (Normal),#34C759
+5,98,91,91,0.3463218,0.0026151151,150,266,367,"Fails in 150–367 cycles (80% CI, median: 266)",84.0,Healthy (Normal),#34C759
+6,105,93,93,0.20752963,0.00028632782,204,349,476,"Fails in 204–476 cycles (80% CI, median: 349)",88.6,Healthy (Normal),#34C759
+7,160,91,91,0.22935465,0.0001844209,120,251,366,"Fails in 120–366 cycles (80% CI, median: 251)",87.7,Healthy (Normal),#34C759
+8,166,95,95,0.3693578,0.0012319402,91,211,316,"Fails in 91–316 cycles (80% CI, median: 211)",84.1,Healthy (Normal),#34C759
+9,55,111,111,0.15274015,0.00031114073,208,331,438,"Fails in 208–438 cycles (80% CI, median: 331)",93.2,Healthy (Normal),#34C759
+10,192,96,96,0.1657891,0.00019250026,132,284,416,"Fails in 132–416 cycles (80% CI, median: 284)",90.4,Healthy (Normal),#34C759
+11,83,97,97,0.84752434,0.010208024,164,280,381,"Fails in 164–381 cycles (80% CI, median: 280)",69.6,Warning (Maintenance Scheduled),#FF9500
+12,217,124,124,0.20622422,0.00017313308,68,202,319,"Fails in 68–319 cycles (80% CI, median: 202)",93.6,Healthy (Normal),#34C759
+13,195,95,95,0.193068,0.00020373115,63,185,290,"Fails in 63–290 cycles (80% CI, median: 185)",89.4,Healthy (Normal),#34C759
+14,46,107,107,0.6730156,0.0023220433,244,380,498,"Fails in 244–498 cycles (80% CI, median: 380)",76.8,Healthy (Normal),#34C759
+15,76,83,83,0.14863907,0.00014439694,292,464,614,"Fails in 292–614 cycles (80% CI, median: 464)",88.8,Healthy (Normal),#34C759
+16,113,84,84,0.09006736,0.0001586813,238,403,547,"Fails in 238–547 cycles (80% CI, median: 403)",90.7,Healthy (Normal),#34C759
+17,165,50,50,0.5973323,0.0011333142,89,209,313,"Fails in 89–313 cycles (80% CI, median: 209)",70.0,Healthy (Normal),#34C759
+18,133,28,28,0.7014598,0.19544962,78,178,264,"Fails in 78–264 cycles (80% CI, median: 178)",53.7,Warning (Maintenance Scheduled),#FF9500
+19,135,87,87,0.015839355,0.0002041681,184,333,463,"Fails in 184–463 cycles (80% CI, median: 333)",93.4,Healthy (Normal),#34C759
+20,184,16,16,1.0,0.984057,0,74,146,"Fails in 0–146 cycles (80% CI, median: 74)",3.4,Critical (Immediate Overhaul),#FF3B30
+21,148,57,57,0.5052657,0.00019796041,161,307,433,"Fails in 161–433 cycles (80% CI, median: 307)",74.0,Healthy (Normal),#34C759
+22,39,111,111,0.13645677,0.0001583986,266,409,534,"Fails in 266–534 cycles (80% CI, median: 409)",93.7,Healthy (Normal),#34C759
+23,130,113,113,0.0,0.00014709603,230,399,546,"Fails in 230–546 cycles (80% CI, median: 399)",98.1,Healthy (Normal),#34C759
+24,186,20,20,1.0,0.9861319,53,165,262,"Fails in 53–262 cycles (80% CI, median: 165)",3.9,Critical (Immediate Overhaul),#FF3B30
+25,48,145,125,0.13868603,0.00014795283,290,449,587,"Fails in 290–587 cycles (80% CI, median: 449)",95.8,Healthy (Normal),#34C759
+26,76,119,119,0.2019786,0.00017872163,267,428,568,"Fails in 267–568 cycles (80% CI, median: 428)",93.0,Healthy (Normal),#34C759
+27,140,66,66,0.15082666,0.00019485978,164,306,431,"Fails in 164–431 cycles (80% CI, median: 306)",86.0,Healthy (Normal),#34C759
+28,158,97,97,0.15555952,0.00019999439,128,262,379,"Fails in 128–379 cycles (80% CI, median: 262)",90.8,Healthy (Normal),#34C759
+29,171,90,90,0.30510053,0.00016684325,175,338,480,"Fails in 175–480 cycles (80% CI, median: 338)",85.2,Healthy (Normal),#34C759
+30,143,115,115,0.5443672,0.000785718,117,239,345,"Fails in 117–345 cycles (80% CI, median: 239)",82.0,Healthy (Normal),#34C759
+31,196,8,8,1.0,0.9984553,16,116,203,"Fails in 16–203 cycles (80% CI, median: 116)",1.4,Critical (Immediate Overhaul),#FF3B30
+32,145,48,48,0.5662447,0.0001956969,151,289,410,"Fails in 151–410 cycles (80% CI, median: 289)",70.7,Healthy (Normal),#34C759
+33,50,106,106,0.37541577,0.001033851,203,321,425,"Fails in 203–425 cycles (80% CI, median: 321)",85.6,Healthy (Normal),#34C759
+34,203,7,7,1.0,0.9988193,0,26,89,"Fails in 0–89 cycles (80% CI, median: 26)",1.2,Critical (Immediate Overhaul),#FF3B30
+35,198,11,11,1.0,0.9980026,0,26,89,"Fails in 0–89 cycles (80% CI, median: 26)",1.9,Critical (Immediate Overhaul),#FF3B30
+36,126,19,19,1.0,0.9495111,68,159,238,"Fails in 68–238 cycles (80% CI, median: 159)",5.6,Critical (Immediate Overhaul),#FF3B30
+37,121,21,21,1.0,0.21733864,120,233,332,"Fails in 120–332 cycles (80% CI, median: 233)",42.5,Warning (Maintenance Scheduled),#FF9500
+38,125,50,50,1.0,0.052285574,140,265,373,"Fails in 140–373 cycles (80% CI, median: 265)",55.4,Warning (Maintenance Scheduled),#FF9500
+39,37,142,125,0.22011675,0.00017643011,347,528,685,"Fails in 347–685 cycles (80% CI, median: 528)",93.4,Healthy (Normal),#34C759
+40,133,28,28,1.0,0.41135746,62,154,234,"Fails in 62–234 cycles (80% CI, median: 154)",33.9,Critical (Immediate Overhaul),#FF3B30
+41,123,18,18,1.0,0.055007324,113,224,320,"Fails in 113–320 cycles (80% CI, median: 224)",50.1,Warning (Maintenance Scheduled),#FF9500
+42,156,10,10,1.0,0.98637193,19,102,173,"Fails in 19–173 cycles (80% CI, median: 102)",2.3,Critical (Immediate Overhaul),#FF3B30
+43,172,59,59,0.55230707,0.03623267,61,170,265,"Fails in 61–265 cycles (80% CI, median: 170)",71.1,Healthy (Normal),#34C759
+44,54,109,109,0.17041223,0.000227346,203,323,428,"Fails in 203–428 cycles (80% CI, median: 323)",92.3,Healthy (Normal),#34C759
+45,152,114,114,0.8125078,0.028129019,115,240,349,"Fails in 115–349 cycles (80% CI, median: 240)",72.5,Healthy (Normal),#34C759
+46,146,47,47,0.9860305,0.10099089,90,202,298,"Fails in 90–298 cycles (80% CI, median: 202)",52.9,Warning (Maintenance Scheduled),#FF9500
+47,73,135,125,0.50010043,0.00066735735,258,414,549,"Fails in 258–549 cycles (80% CI, median: 414)",85.0,Healthy (Normal),#34C759
+48,78,92,92,0.07771138,0.00027350514,200,330,444,"Fails in 200–444 cycles (80% CI, median: 330)",92.4,Healthy (Normal),#34C759
+49,303,21,21,1.0,0.9975128,0,0,1,"Fails in 0–1 cycles (80% CI, median: 0)",3.5,Critical (Immediate Overhaul),#FF3B30
+50,74,79,79,0.16069292,0.0001807685,273,436,578,"Fails in 273–578 cycles (80% CI, median: 436)",87.8,Healthy (Normal),#34C759
+51,144,114,114,0.24864087,0.00023710795,160,303,427,"Fails in 160–427 cycles (80% CI, median: 303)",90.8,Healthy (Normal),#34C759
+52,189,29,29,0.8930329,0.74511755,67,187,292,"Fails in 67–292 cycles (80% CI, median: 187)",20.6,Critical (Immediate Overhaul),#FF3B30
+53,164,26,26,1.0,0.56842166,45,143,228,"Fails in 45–228 cycles (80% CI, median: 143)",25.7,Critical (Immediate Overhaul),#FF3B30
+54,121,97,97,0.2091087,0.00017823187,247,420,570,"Fails in 247–570 cycles (80% CI, median: 420)",89.2,Healthy (Normal),#34C759
+55,113,137,125,0.0,0.00018830736,223,381,518,"Fails in 223–518 cycles (80% CI, median: 381)",100.0,Healthy (Normal),#34C759
+56,136,15,15,1.0,0.9995034,57,148,227,"Fails in 57–227 cycles (80% CI, median: 148)",2.4,Critical (Immediate Overhaul),#FF3B30
+57,160,103,103,0.47719136,0.0005086091,94,214,318,"Fails in 94–318 cycles (80% CI, median: 214)",82.1,Healthy (Normal),#34C759
+58,176,37,37,1.0,0.5685382,27,122,205,"Fails in 27–205 cycles (80% CI, median: 122)",27.5,Critical (Immediate Overhaul),#FF3B30
+59,94,114,114,0.13382392,0.00019050286,313,504,671,"Fails in 313–671 cycles (80% CI, median: 504)",94.2,Healthy (Normal),#34C759
+60,147,100,100,0.14098178,0.00042850693,160,304,429,"Fails in 160–429 cycles (80% CI, median: 304)",91.7,Healthy (Normal),#34C759
+61,159,21,21,1.0,0.73555374,56,158,246,"Fails in 56–246 cycles (80% CI, median: 158)",16.6,Critical (Immediate Overhaul),#FF3B30
+62,232,54,54,0.8118889,0.0032972721,54,188,305,"Fails in 54–305 cycles (80% CI, median: 188)",64.1,Warning (Maintenance Scheduled),#FF9500
+63,155,72,72,0.86505735,0.0021496394,75,183,277,"Fails in 75–277 cycles (80% CI, median: 183)",65.5,Warning (Maintenance Scheduled),#FF9500
+64,168,28,28,1.0,0.5482155,49,151,239,"Fails in 49–239 cycles (80% CI, median: 151)",27.1,Critical (Immediate Overhaul),#FF3B30
+65,71,128,125,0.3540715,0.00018475197,331,520,684,"Fails in 331–684 cycles (80% CI, median: 520)",89.4,Healthy (Normal),#34C759
+66,147,14,14,1.0,0.99899715,34,119,193,"Fails in 34–193 cycles (80% CI, median: 119)",2.3,Critical (Immediate Overhaul),#FF3B30
+67,71,77,77,0.22794749,0.0001880741,242,389,516,"Fails in 242–516 cycles (80% CI, median: 389)",85.5,Healthy (Normal),#34C759
+68,187,8,8,1.0,0.99890566,0,44,108,"Fails in 0–108 cycles (80% CI, median: 44)",1.3,Critical (Immediate Overhaul),#FF3B30
+69,54,121,121,0.279437,0.00016066481,267,417,548,"Fails in 267–548 cycles (80% CI, median: 417)",91.0,Healthy (Normal),#34C759
+70,152,94,94,0.2316807,0.0008629506,122,250,362,"Fails in 122–362 cycles (80% CI, median: 250)",88.0,Healthy (Normal),#34C759
+71,68,118,118,0.21925208,0.0001935233,276,437,578,"Fails in 276–578 cycles (80% CI, median: 437)",92.3,Healthy (Normal),#34C759
+72,131,50,50,0.23768452,0.0001601877,123,243,347,"Fails in 123–347 cycles (80% CI, median: 243)",80.9,Healthy (Normal),#34C759
+73,112,131,125,0.16978404,0.0001603607,286,473,635,"Fails in 286–635 cycles (80% CI, median: 473)",94.9,Healthy (Normal),#34C759
+74,137,126,125,0.20318463,0.00024003633,153,289,408,"Fails in 153–408 cycles (80% CI, median: 289)",93.9,Healthy (Normal),#34C759
+75,88,113,113,0.14463492,0.00018721173,237,390,523,"Fails in 237–523 cycles (80% CI, median: 390)",93.7,Healthy (Normal),#34C759
+76,205,10,10,1.0,0.99922097,0,58,132,"Fails in 0–132 cycles (80% CI, median: 58)",1.6,Critical (Immediate Overhaul),#FF3B30
+77,162,34,34,1.0,0.20049496,54,156,244,"Fails in 54–244 cycles (80% CI, median: 156)",45.4,Warning (Maintenance Scheduled),#FF9500
+78,72,107,107,0.5722238,0.00015143333,401,623,816,"Fails in 401–816 cycles (80% CI, median: 623)",79.9,Healthy (Normal),#34C759
+79,101,63,63,0.119697325,0.00029148647,176,306,419,"Fails in 176–419 cycles (80% CI, median: 306)",86.5,Healthy (Normal),#34C759
+80,133,90,90,0.2531022,0.00029418984,154,288,406,"Fails in 154–406 cycles (80% CI, median: 288)",86.8,Healthy (Normal),#34C759
+81,213,8,8,1.0,0.9995271,0,19,83,"Fails in 0–83 cycles (80% CI, median: 19)",1.3,Critical (Immediate Overhaul),#FF3B30
+82,162,9,9,1.0,0.9990663,0,68,132,"Fails in 0–132 cycles (80% CI, median: 68)",1.5,Critical (Immediate Overhaul),#FF3B30
+83,73,137,125,0.14732498,0.00015606284,261,418,555,"Fails in 261–555 cycles (80% CI, median: 418)",95.6,Healthy (Normal),#34C759
+84,172,58,58,0.78720385,0.005367286,87,209,314,"Fails in 87–314 cycles (80% CI, median: 209)",65.4,Warning (Maintenance Scheduled),#FF9500
+85,34,118,118,0.2554769,0.0005045502,211,326,426,"Fails in 211–426 cycles (80% CI, median: 326)",91.2,Healthy (Normal),#34C759
+86,110,89,89,0.21621819,0.00023363164,197,342,467,"Fails in 197–467 cycles (80% CI, median: 342)",87.7,Healthy (Normal),#34C759
+87,56,116,116,0.16198604,0.00016926849,350,540,706,"Fails in 350–706 cycles (80% CI, median: 540)",93.7,Healthy (Normal),#34C759
+88,68,115,115,0.64730686,0.0005237934,248,397,526,"Fails in 248–526 cycles (80% CI, median: 397)",79.0,Healthy (Normal),#34C759
+89,177,136,125,0.21017094,0.00032091234,136,282,410,"Fails in 136–410 cycles (80% CI, median: 282)",93.7,Healthy (Normal),#34C759
+90,146,28,28,1.0,0.8837163,43,132,210,"Fails in 43–210 cycles (80% CI, median: 132)",10.3,Critical (Immediate Overhaul),#FF3B30
+91,234,38,38,1.0,0.9960859,0,19,89,"Fails in 0–89 cycles (80% CI, median: 19)",6.3,Critical (Immediate Overhaul),#FF3B30
+92,150,20,20,1.0,0.9963936,60,159,245,"Fails in 60–245 cycles (80% CI, median: 159)",3.4,Critical (Immediate Overhaul),#FF3B30
+93,244,85,85,1.0,0.13646749,0,94,188,"Fails in 0–188 cycles (80% CI, median: 94)",56.8,Warning (Maintenance Scheduled),#FF9500
+94,133,55,55,0.96034944,0.033271465,68,163,245,"Fails in 68–245 cycles (80% CI, median: 163)",58.3,Warning (Maintenance Scheduled),#FF9500
+95,89,128,125,0.2166628,0.00016401756,265,432,576,"Fails in 265–576 cycles (80% CI, median: 432)",93.5,Healthy (Normal),#34C759
+96,97,137,125,0.13293901,0.00017583961,303,491,655,"Fails in 303–655 cycles (80% CI, median: 491)",96.0,Healthy (Normal),#34C759
+97,134,82,82,0.5241501,0.00019508453,165,305,428,"Fails in 165–428 cycles (80% CI, median: 305)",77.4,Healthy (Normal),#34C759
+98,121,59,59,0.3576492,0.001248861,107,213,307,"Fails in 107–307 cycles (80% CI, median: 213)",78.6,Healthy (Normal),#34C759
+99,97,117,117,0.2253711,0.00014036067,301,488,651,"Fails in 301–651 cycles (80% CI, median: 488)",92.0,Healthy (Normal),#34C759
+100,198,20,20,1.0,0.99294794,0,67,141,"Fails in 0–141 cycles (80% CI, median: 67)",3.6,Critical (Immediate Overhaul),#FF3B30
